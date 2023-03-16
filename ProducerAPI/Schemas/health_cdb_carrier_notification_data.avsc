@@ -1,0 +1,253 @@
+﻿{
+  "fields": [
+    {
+      "name": "cdb_carrier_notificationrecords",
+      "type": {
+        "items": {
+          "fields": [
+            {
+              "default": "1",
+              "name": "carrier_record_id",
+              "type": [
+                "null",
+                "string"
+              ]
+            },
+            {
+              "default": "initial",
+              "name": "status",
+              "type": [
+                "null",
+                "string"
+              ]
+            },
+            {
+              "name": "client_name",
+              "type": [
+                "null",
+                "string"
+              ]
+            },
+            {
+              "name": "division_name",
+              "type": [
+                "null",
+                "string"
+              ]
+            },
+            {
+              "name": "member_id",
+              "type": [
+                "null",
+                "string"
+              ]
+            },
+            {
+              "name": "plan_name",
+              "type": [
+                "null",
+                "string"
+              ]
+            },
+            {
+              "name": "plan_id",
+              "type": [
+                "null",
+                "string"
+              ]
+            },
+            {
+              "default": "null",
+              "name": "carrier_name",
+              "type": [
+                "null",
+                "string"
+              ]
+            },
+            {
+              "name": "carrier_notification_name_type",
+              "type": [
+                "null",
+                "string"
+              ]
+            },
+            {
+              "name": "carrier_notification_description",
+              "type": [
+                "null",
+                "string"
+              ]
+            },
+            {
+              "name": "member_name",
+              "type": [
+                "null",
+                "string"
+              ]
+            },
+            {
+              "name": "first_name",
+              "type": [
+                "null",
+                "string"
+              ]
+            },
+            {
+              "default": "null",
+              "name": "middle_initial",
+              "type": [
+                "null",
+                "string"
+              ]
+            },
+            {
+              "name": "last_name",
+              "type": [
+                "null",
+                "string"
+              ]
+            },
+            {
+              "name": "member_ssn",
+              "type": [
+                "null",
+                "string"
+              ]
+            },
+            {
+              "name": "member_dob",
+              "type": [
+                "null",
+                "string"
+              ]
+            },
+            {
+              "name": "effective_date",
+              "type": [
+                "null",
+                "string"
+              ]
+            },
+            {
+              "name": "new_data_text",
+              "type": [
+                "null",
+                "string"
+              ]
+            },
+            {
+              "name": "individual_identifier",
+              "type": [
+                "null",
+                "string"
+              ]
+            },
+            {
+              "name": "dependent_id",
+              "type": [
+                "null",
+                "string"
+              ]
+            },
+            {
+              "name": "dependent_name",
+              "type": [
+                "null",
+                "string"
+              ]
+            },
+            {
+              "default": "null",
+              "name": "dependent_first_name",
+              "type": [
+                "null",
+                "string"
+              ]
+            },
+            {
+              "default": "null",
+              "name": "dependent_middle_initial",
+              "type": [
+                "null",
+                "string"
+              ]
+            },
+            {
+              "default": "null",
+              "name": "dependent_last_name",
+              "type": [
+                "null",
+                "string"
+              ]
+            },
+            {
+              "name": "dependent_ssn",
+              "type": [
+                "null",
+                "string"
+              ]
+            },
+            {
+              "name": "dependent_dob",
+              "type": [
+                "null",
+                "string"
+              ]
+            },
+            {
+              "name": "relationship",
+              "type": [
+                "null",
+                "string"
+              ]
+            },
+            {
+              "default": "null",
+              "name": "dependent_new_data_text",
+              "type": [
+                "null",
+                "string"
+              ]
+            },
+            {
+              "name": "entered_date",
+              "type": [
+                "null",
+                "string"
+              ]
+            },
+            {
+              "name": "processed_date",
+              "type": [
+                "null",
+                "string"
+              ]
+            },
+            {
+              "default": "null",
+              "name": "generated_date_time",
+              "type": [
+                "null",
+                "string"
+              ]
+            },
+            {
+              "default": "null",
+              "name": "enrollment_date",
+              "type": [
+                "null",
+                "string"
+              ]
+            }
+          ],
+          "name": "cdb_carrier_notification_record",
+          "type": "record"
+        },
+        "type": "array"
+      }
+    }
+  ],
+  "name": "cdb_carrier_notification",
+  "namespace": "wex.health.carrier.notification",
+  "type": "record"
+}
