@@ -6,6 +6,7 @@
     <ImplicitUsings>enable</ImplicitUsings>
     <DockerDefaultTargetOS>Linux</DockerDefaultTargetOS>
     <DockerfileContext>..\ProducerAPI</DockerfileContext>
+    <UserSecretsId>dd3b791d-d556-4817-9f41-f49db7a7bcc7</UserSecretsId>
   </PropertyGroup>
 
   <ItemGroup>

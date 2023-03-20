@@ -2,6 +2,6 @@
 {
     public class MBECarrierNotificationsLogError
     {
-        public List<MBECarrierNotificationRecordLogError> logging_carrier_notificationrecords { get; set; }
+        public List<MBECarrierNotificationRecordLogError>? logging_carrier_notificationrecords { get; set; }
     }
 }

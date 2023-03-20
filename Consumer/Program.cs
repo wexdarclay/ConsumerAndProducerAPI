@@ -8,6 +8,7 @@ using Wex.Libraries.Kafka.DependencyInjection;
 using Consumer.Models.CDBCarrierMessages;
 using Consumer.Models.MBECarrierNotificationLog;
 using Consumer.Models.MBECarrierNotificationData;
+using Consumer.Models.MBECarrierNofificationLogError;
 
 var cts = new CancellationTokenSource();
 Console.CancelKeyPress += (s, e) =>
@@ -21,6 +22,7 @@ var builder = Host.CreateDefaultBuilder()
    {
 	   services
 		.AddKafka(WexDivision.Health, typeof(Program).Assembly)
+		//ADDING THE CONSUMER FOR: HEALTH.CDB.CARRIER-NOTIFICATION.DATA 
 		.AddConsumer(builder =>
 		{
 			builder
@@ -28,20 +30,22 @@ var builder = Host.CreateDefaultBuilder()
 			.AddSubject<CDBCarrierNotifications>("health.cdb.carrier-notification.data");
 		})
 		.AddTransient<IHandler<CDBCarrierNotifications>, CDBMessageHandler>()
-	   .AddConsumer(builder =>
-	   {
-		   builder
-		   .AddTopic("processing.mbe.carrier-notifications", "Liveness")
-		   .AddSubject<MBECarrierNotificationsData>("health.mbe.carrier-notifications.data");
-	   })
-		.AddTransient<IHandler<MBECarrierNotificationsData>, MBEMessageDataHandler>()
+	   //ADDING THE CONSUMER FOR: HEALTH.MBE.CARRIER-NOTIFICATION.LOG
+	   //  .AddConsumer(builder =>
+	   //  {
+	   //   builder
+	   //   .AddTopic("logging.mbe.carrier-notifications", "Liveness")
+	   //   .AddSubject<MBECarrierNotificationsData>("health.mbe.carrier-notifications.log");
+	   //  })
+	   //.AddTransient<IHandler<MBECarrierNotificationsLog>, MBEMessageLogHandler>();
+	   //ADDING THE CONSUMER FOR: HEALTH.MBE.CARRIER-NOTIFICATION.LOG-ERROR
 	   .AddConsumer(builder =>
 	   {
 		   builder
 		   .AddTopic("logging.mbe.carrier-notifications", "Liveness")
-		   .AddSubject<CDBCarrierNotifications>("logging.mbe.carrier-notifications");
+		   .AddSubject<MBECarrierNotificationsLogError>("health.mbe.carrier-notification.log-error");
 	   })
-		.AddTransient<IHandler<MBECarrierNotificationsLog>, MBEMessageLogHandler>();
+		.AddTransient<IHandler<MBECarrierNotificationsLogError>, MBEMessageLogErrorHandler>();
 
    })
    .ConfigureAppConfiguration((hostingContext, config) =>
