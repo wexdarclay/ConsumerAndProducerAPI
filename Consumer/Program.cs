@@ -1,11 +1,13 @@
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using Consumer.Models;
 using Consumer.Handlers;
 using Wex.Libraries.Kafka.Configuration;
 using Wex.Libraries.Kafka.Consumer;
 using Wex.Libraries.Kafka.DependencyInjection;
+using Consumer.Models.CDBCarrierMessages;
+using Consumer.Models.MBECarrierNotificationLog;
+using Consumer.Models.MBECarrierNotificationData;
 
 var cts = new CancellationTokenSource();
 Console.CancelKeyPress += (s, e) =>
@@ -30,16 +32,16 @@ var builder = Host.CreateDefaultBuilder()
 	   {
 		   builder
 		   .AddTopic("processing.mbe.carrier-notifications", "Liveness")
-		   .AddSubject<MBECarrierNotifications>("health.mbe.carrier-notifications.data");
+		   .AddSubject<MBECarrierNotificationsData>("health.mbe.carrier-notifications.data");
 	   })
-		.AddTransient<IHandler<MBECarrierNotifications>, MBEMessageHandler>()
+		.AddTransient<IHandler<MBECarrierNotificationsData>, MBEMessageDataHandler>()
 	   .AddConsumer(builder =>
 	   {
 		   builder
 		   .AddTopic("logging.mbe.carrier-notifications", "Liveness")
 		   .AddSubject<CDBCarrierNotifications>("logging.mbe.carrier-notifications");
 	   })
-		.AddTransient<IHandler<LoggingCarrierNotifications>, LoggingMessageHandler>();
+		.AddTransient<IHandler<MBECarrierNotificationsLog>, MBEMessageLogHandler>();
 
    })
    .ConfigureAppConfiguration((hostingContext, config) =>

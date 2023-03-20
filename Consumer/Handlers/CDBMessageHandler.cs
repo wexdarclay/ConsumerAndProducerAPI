@@ -1,11 +1,11 @@
-﻿using Consumer.Models;
+﻿using Consumer.Models.CDBCarrierMessages;
 using System.Text.Json;
 using Wex.Libraries.Kafka;
 using Wex.Libraries.Kafka.Consumer;
 
 namespace Consumer.Handlers
 {
-	internal class CDBMessageHandler : IHandler<CDBCarrierNotifications>
+    internal class CDBMessageHandler : IHandler<CDBCarrierNotifications>
 	{
 		public Task HandleAsync(Message<CDBCarrierNotifications> message, CancellationToken cancellationToken)
 		{
