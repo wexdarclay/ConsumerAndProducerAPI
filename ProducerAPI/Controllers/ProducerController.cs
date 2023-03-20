@@ -27,10 +27,10 @@ namespace ProducerAPI.Controllers
 				services.AddKafka(WexDivision.Health, typeof(Program).Assembly);
 				services.AddProducer<CDBCarrierNotifications>("health.cdb.carrier-notification.data", ".\\Schemas\\health_cdb_carrier_notification_data.avsc");
 			});
-			//hostbuilder.ConfigureAppConfiguration((hostingContext, config) =>
-			//{
-			//	config.AddUserSecrets<Program>();
-			//});
+			hostbuilder.ConfigureAppConfiguration((hostingContext, config) =>
+			{
+				config.AddUserSecrets<Program>();
+			});
 			hostbuilder.UseConsoleLifetime();
 
 			var host = hostbuilder.Build();
@@ -80,7 +80,7 @@ namespace ProducerAPI.Controllers
 
 			try
 			{
-				await _kafkaProducer.ProduceAsync("processing.cdb.carrier-notifications", "1", kafka_message, cts.Token);
+				await _kafkaProducer.ProduceAsync("processing.cdb.carrier-notifications", "2", kafka_message, cts.Token);
 				Console.WriteLine("Completed Post");
 			}
 			catch (Exception e)
