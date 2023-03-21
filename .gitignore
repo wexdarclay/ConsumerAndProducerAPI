@@ -363,3 +363,4 @@ MigrationBackup/
 FodyWeavers.xsd
 Consumer/appsettings.json
 ProducerAPI/appsettings.json
+ConsumeLog/appsetting.json

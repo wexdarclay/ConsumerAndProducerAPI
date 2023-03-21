@@ -1,4 +1,4 @@
-{
+﻿{
   "Kafka": {
     "BootstrapServers": "wex-kafka-public-wex-eventing-public.aivencloud.com:28545",
     "SecurityProtocol": "Ssl",

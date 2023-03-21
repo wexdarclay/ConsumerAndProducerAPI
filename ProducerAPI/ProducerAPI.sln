@@ -3,9 +3,11 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.4.33213.308
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ProducerAPI", "ProducerAPI.csproj", "{EAB0861A-A15D-47A6-B04E-54428D8F6D74}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ProducerAPI", "ProducerAPI.csproj", "{EAB0861A-A15D-47A6-B04E-54428D8F6D74}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Consumer", "..\Consumer\Consumer.csproj", "{24FD9C5D-0F71-4B55-A60C-38DF166DD05A}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Consumer", "..\Consumer\Consumer.csproj", "{24FD9C5D-0F71-4B55-A60C-38DF166DD05A}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LogConsumer", "..\LogConsumer\LogConsumer.csproj", "{654AB664-ABC9-4DD1-AE4D-763559005FC7}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -21,6 +23,10 @@ Global
 		{24FD9C5D-0F71-4B55-A60C-38DF166DD05A}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{24FD9C5D-0F71-4B55-A60C-38DF166DD05A}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{24FD9C5D-0F71-4B55-A60C-38DF166DD05A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{654AB664-ABC9-4DD1-AE4D-763559005FC7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{654AB664-ABC9-4DD1-AE4D-763559005FC7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{654AB664-ABC9-4DD1-AE4D-763559005FC7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{654AB664-ABC9-4DD1-AE4D-763559005FC7}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
