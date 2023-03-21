@@ -41,6 +41,7 @@ namespace ProducerAPI.Controllers
 			{
 				carrier_record_id = Guid.NewGuid().ToString(),
 				status = "test",
+				client_id = "test",
 				client_name = "test",
 				division_name = "test",
 				member_id = "test",
@@ -80,7 +81,7 @@ namespace ProducerAPI.Controllers
 
 			try
 			{
-				await _kafkaProducer.ProduceAsync("processing.cdb.carrier-notifications", "2", kafka_message, cts.Token);
+				await _kafkaProducer.ProduceAsync("processing.cdb.carrier-notifications", "test-key", kafka_message, cts.Token);
 				Console.WriteLine("Completed Post");
 			}
 			catch (Exception e)
@@ -120,6 +121,7 @@ namespace ProducerAPI.Controllers
 			{
 				carrier_record_id = record.carrier_record_id,
 				status = record.status,
+				client_id = record.client_id,
 				client_name = record.client_name,
 				division_name = record.division_name,
 				member_id = record.member_id,
@@ -159,7 +161,7 @@ namespace ProducerAPI.Controllers
 
 			try
 			{
-				await _kafkaProducer.ProduceAsync("processing.cdb.carrier-notifications", "1", kafka_message, cts.Token);
+				await _kafkaProducer.ProduceAsync("processing.cdb.carrier-notifications", DateTime.Now.ToString(), kafka_message, cts.Token);
 				Console.WriteLine("Completed Post");
 			}
 			catch (Exception e)
@@ -203,7 +205,7 @@ namespace ProducerAPI.Controllers
 
 			try
 			{
-				await _kafkaProducer.ProduceAsync("processing.cdb.carrier-notifications", "1", kafka_message, cts.Token);
+				await _kafkaProducer.ProduceAsync("processing.cdb.carrier-notifications", "test-key", kafka_message, cts.Token);
 				Console.WriteLine("Completed Post");
 			}
 			catch (Exception e)

@@ -4,6 +4,7 @@
     {
         public string? carrier_record_id { get; set; }
         public string? status { get; set; }
+        public string? client_id { get; set; }
         public string? client_name { get; set; }
         public string? division_name { get; set; }
         public string? member_id { get; set; }

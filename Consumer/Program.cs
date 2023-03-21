@@ -8,7 +8,7 @@ using Wex.Libraries.Kafka.DependencyInjection;
 using Consumer.Models.CDBCarrierMessages;
 using Consumer.Models.MBECarrierNotificationLog;
 using Consumer.Models.MBECarrierNotificationData;
-using Consumer.Models.MBECarrierNofificationLogError;
+//using Consumer.Models.MBECarrierNofificationLogError;
 
 var cts = new CancellationTokenSource();
 Console.CancelKeyPress += (s, e) =>
@@ -31,21 +31,24 @@ var builder = Host.CreateDefaultBuilder()
 			})
 			.AddTransient<IHandler<CDBCarrierNotifications>, CDBMessageHandler>()
 			//ADDING THE CONSUMER FOR: HEALTH.MBE.CARRIER - NOTIFICATION.LOG
+			
+			
+			
 			.AddConsumer(builder =>
 			{
 				builder
 				.AddTopic("logging.mbe.carrier-notifications", "Liveness")
 				.AddSubject<MBECarrierNotificationsData>("health.mbe.carrier-notifications.log");
 			})
-			.AddTransient<IHandler<MBECarrierNotificationsLog>, MBEMessageLogHandler>()
-			//ADDING THE CONSUMER FOR: HEALTH.MBE.CARRIER - NOTIFICATION.LOG - ERROR
-			.AddConsumer(builder =>
-			{
-				builder
-				.AddTopic("logging.mbe.carrier-notifications", "Liveness")
-				.AddSubject<MBECarrierNotificationsLogError>("health.mbe.carrier-notification.log-error");
-			})
-			.AddTransient<IHandler<MBECarrierNotificationsLogError>, MBEMessageLogErrorHandler>();
+			.AddTransient<IHandler<MBECarrierNotificationsLog>, MBEMessageLogHandler>();
+	   //ADDING THE CONSUMER FOR: HEALTH.MBE.CARRIER - NOTIFICATION.LOG - ERROR
+	   //.AddConsumer(builder =>
+	   //{
+	   //	builder
+	   //	.AddTopic("logging.mbe.carrier-notifications", "Liveness")
+	   //	.AddSubject<MBECarrierNotificationsLogError>("health.mbe.carrier-notification.log-error");
+	   //})
+	   //.AddTransient<IHandler<MBECarrierNotificationsLogError>, MBEMessageLogErrorHandler>();
    })
    .ConfigureAppConfiguration((hostingContext, config) =>
    {

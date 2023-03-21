@@ -40,5 +40,6 @@
 		public string? mbe_plan_id { get; set; }
 		public string? mbe_plan_name { get; set; }
 		public string? mbe_user_id { get; set; }
-    }
+		public string? processed_date { get; set; }
+	}
 }
