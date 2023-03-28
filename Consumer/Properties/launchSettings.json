@@ -8,7 +8,16 @@
     }
   },
   "profiles": {
-    "Consumer": {
+    "Consumer-Public": {
+      "commandName": "Project",
+      "dotnetRunMessages": true,
+      "launchBrowser": true,
+      "applicationUrl": "https://localhost:7251;http://localhost:5204",
+      "environmentVariables": {
+        "ASPNETCORE_ENVIRONMENT": "Public"
+      }
+    },
+    "Consumer-Development": {
       "commandName": "Project",
       "dotnetRunMessages": true,
       "launchBrowser": true,
