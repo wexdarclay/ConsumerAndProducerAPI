@@ -13,28 +13,20 @@ namespace ProducerAPI.Controllers
 	[ApiController]
 	public class ProducerController : ControllerBase
 	{
+		IKafkaProducer<CDBCarrierNotifications> _kafkaProducer;
+		CancellationTokenSource _cts;
+		public ProducerController(IKafkaProducer<CDBCarrierNotifications> producer)
+		{
+			_kafkaProducer = producer;
+			_cts = new CancellationTokenSource();
+		}
+
 		//SendingCDBCarrierNotification
 		[HttpPost("/send-predefined-cdb-carrier-notification")]
 		public async Task<Message<CDBCarrierNotifications>> PostPredefinedCDBCarrierNotifications()
 		{
 			Console.WriteLine("sending cdb predefined");
 
-			var cts = new CancellationTokenSource();
-
-			var hostbuilder = Host.CreateDefaultBuilder();
-			hostbuilder.ConfigureServices((hostContext, services) =>
-			{
-				services.AddKafka(WexDivision.Health, typeof(Program).Assembly);
-				services.AddProducer<CDBCarrierNotifications>("health.cdb.carrier-notification.data", ".\\Schemas\\health_cdb_carrier_notification_data.avsc");
-			});
-			hostbuilder.ConfigureAppConfiguration((hostingContext, config) =>
-			{
-				config.AddUserSecrets<Program>();
-			});
-			hostbuilder.UseConsoleLifetime();
-
-			var host = hostbuilder.Build();
-			var _kafkaProducer = host.Services.GetRequiredService<IKafkaProducer<CDBCarrierNotifications>>();
 			var domainEntity = new CDBCarrierNotifications();
 			domainEntity.cdb_carrier_notificationrecords = new List<CDBCarrierNotificationRecord>();
 			domainEntity.cdb_carrier_notificationrecords.Add(new CDBCarrierNotificationRecord()
@@ -81,7 +73,7 @@ namespace ProducerAPI.Controllers
 
 			try
 			{
-				await _kafkaProducer.ProduceAsync("processing.cdb.carrier-notifications", "test-key", kafka_message, cts.Token);
+				await _kafkaProducer.ProduceAsync("processing.cdb.carrier-notifications", "test-key", kafka_message, _cts.Token);
 				Console.WriteLine("Completed Post");
 			}
 			catch (Exception e)
@@ -89,7 +81,6 @@ namespace ProducerAPI.Controllers
 				Console.WriteLine($"{e.Message}");
 			};
 
-			await host.StopAsync(cts.Token);
 			return kafka_message;
 		}
 
@@ -99,22 +90,6 @@ namespace ProducerAPI.Controllers
 		{
 			Console.WriteLine("sending cdb");
 
-			var cts = new CancellationTokenSource();
-
-			var hostbuilder = Host.CreateDefaultBuilder();
-			hostbuilder.ConfigureServices((hostContext, services) =>
-			{
-				services.AddKafka(WexDivision.Health, typeof(Program).Assembly);
-				services.AddProducer<CDBCarrierNotifications>("health.cdb.carrier-notification.data", ".\\Schemas\\health_cdb_carrier_notification_data.avsc");
-			});
-			//hostbuilder.ConfigureAppConfiguration((hostingContext, config) =>
-			//{
-			//	config.AddUserSecrets<Program>();
-			//});
-			hostbuilder.UseConsoleLifetime();
-
-			var host = hostbuilder.Build();
-			var _kafkaProducer = host.Services.GetRequiredService<IKafkaProducer<CDBCarrierNotifications>>();
 			var domainEntity = new CDBCarrierNotifications();
 			domainEntity.cdb_carrier_notificationrecords = new List<CDBCarrierNotificationRecord>();
 			domainEntity.cdb_carrier_notificationrecords.Add(new CDBCarrierNotificationRecord()
@@ -161,16 +136,13 @@ namespace ProducerAPI.Controllers
 
 			try
 			{
-				await _kafkaProducer.ProduceAsync("processing.cdb.carrier-notifications", DateTime.Now.ToString(), kafka_message, cts.Token);
+				await _kafkaProducer.ProduceAsync("processing.cdb.carrier-notifications", DateTime.Now.ToString(), kafka_message, _cts.Token);
 				Console.WriteLine("Completed Post");
 			}
 			catch (Exception e)
 			{
 				Console.WriteLine($"{e.Message}");
 			};
-
-			await host.StopAsync(cts.Token);
-
 		}
 
 		//SendingCDBThreePassTwoFail
@@ -179,22 +151,6 @@ namespace ProducerAPI.Controllers
 		{
 			Console.WriteLine("sending multiple");
 
-			var cts = new CancellationTokenSource();
-
-			var hostbuilder = Host.CreateDefaultBuilder();
-			hostbuilder.ConfigureServices((hostContext, services) =>
-			{
-				services.AddKafka(WexDivision.Health, typeof(Program).Assembly);
-				services.AddProducer<CDBCarrierNotifications>("health.cdb.carrier-notification.data", ".\\Schemas\\health_cdb_carrier_notification_data.avsc");
-			});
-			//hostbuilder.ConfigureAppConfiguration((hostingContext, config) =>
-			//{
-			//	config.AddUserSecrets<Program>();
-			//});
-			hostbuilder.UseConsoleLifetime();
-
-			var host = hostbuilder.Build();
-			var _kafkaProducer = host.Services.GetRequiredService<IKafkaProducer<CDBCarrierNotifications>>();
 			var domainEntity = new CDBCarrierNotifications();
 			domainEntity = records;
 
@@ -205,15 +161,13 @@ namespace ProducerAPI.Controllers
 
 			try
 			{
-				await _kafkaProducer.ProduceAsync("processing.cdb.carrier-notifications", "test-key", kafka_message, cts.Token);
+				await _kafkaProducer.ProduceAsync("processing.cdb.carrier-notifications", "test-key", kafka_message, _cts.Token);
 				Console.WriteLine("Completed Post");
 			}
 			catch (Exception e)
 			{
 				Console.WriteLine($"{e.Message}");
 			};
-
-			await host.StopAsync(cts.Token);
 		}
 	}
 }

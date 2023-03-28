@@ -11,11 +11,12 @@ Console.CancelKeyPress += (s, e) =>
 	cts.Cancel();
 };
 
-var builder = Host.CreateDefaultBuilder()
-   .ConfigureServices((hostContext, services) =>
+var builder = Host.CreateDefaultBuilder();
+
+builder.ConfigureServices((hostContext, services) =>
    {
 	   services
-			.AddKafka(WexDivision.Health, typeof(Program).Assembly)
+			.AddKafka(WexDivision.Health, typeof(Program).Assembly,"Kafka-Public")
 			.AddConsumer(builder =>
 			{
 				builder

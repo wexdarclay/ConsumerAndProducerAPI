@@ -10,12 +10,13 @@ Console.CancelKeyPress += (s, e) =>
 	e.Cancel = true;
 	cts.Cancel();
 };
+var aivenEnv = "";
 
-var builder = Host.CreateDefaultBuilder()
-   .ConfigureServices((hostContext, services) =>
+var builder = Host.CreateDefaultBuilder();
+builder.ConfigureServices((hostContext, services) =>
    {
-	   services
-			.AddKafka(WexDivision.Health, typeof(Program).Assembly)
+	   aivenEnv = Environment.GetEnvironmentVariable("ASPNETCORE_ENVIRONMENT");
+	   services.AddKafka(WexDivision.Health, typeof(Program).Assembly, aivenEnv == "Development"? "Kafka-Dev" : "Kafka-Public")
 			.AddConsumer(builder =>
 			{
 				builder
